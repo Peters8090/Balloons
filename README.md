@@ -1,2 +1,2 @@
-# Ballons
+# Balloons
 Mobile game about destroying balloons
