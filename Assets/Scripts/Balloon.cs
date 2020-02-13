@@ -11,10 +11,15 @@ public class Balloon : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
-    void Update()
+    void FixedUpdate()
     {
         rb.AddForce(Vector3.up * floatingForce);
     }
+
+    //void LateUpdate()
+    //{
+    //    transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {

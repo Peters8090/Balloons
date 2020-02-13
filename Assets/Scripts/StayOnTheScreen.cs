@@ -11,7 +11,7 @@ public class StayOnTheScreen : MonoBehaviour
 
     float topBorder = 0.8f;
 
-    void Update()
+    void FixedUpdate()
     {
         //https://answers.unity.com/questions/509283/limit-a-sprite-to-not-go-off-screen.html
         float distance = (transform.position - Camera.main.transform.position).z;
