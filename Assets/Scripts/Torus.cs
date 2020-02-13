@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Torus : MonoBehaviour
 {
@@ -22,7 +23,11 @@ public class Torus : MonoBehaviour
         {
             Vector3 delta = new Vector3(touch.deltaPosition.x, touch.deltaPosition.y, 0);
 
-            transform.position += delta * movingSensivity;
+
+            print(delta);
+            //transform.DOBlendableMoveBy(delta * movingSensivity, 0.01f).SetRelative();
+            //transform.position += delta * movingSensivity;
+            transform.DOMove(transform.position + delta * movingSensivity, Time.deltaTime);
         }
         #endregion
 
@@ -36,7 +41,8 @@ public class Torus : MonoBehaviour
             rotationDeg.z = DetectTouchMovement.turnAngleDelta;
             desiredRotation *= Quaternion.Euler(rotationDeg * rotatingSensitvity);
         }
-        transform.rotation = desiredRotation;
+        //transform.rotation = desiredRotation;
+        //transform.DOBlendableRotateBy(DetectTouchMovement.turnAngleDelta * Vector3.forward, 1f);
         #endregion
     }
 }
