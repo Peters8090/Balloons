@@ -17,7 +17,6 @@ public class Balloon : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddForce(Vector3.up * floatingForce);
-        //transform.DOMoveY(transform.position.y + floatingForce, floatingForce);
     }
 
     void OnCollisionEnter(Collision collision)

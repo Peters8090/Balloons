@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Torus : MonoBehaviour
 {
-    float movingSensivity = 0.001f;
+    float movingSensivity = 2f;
 
     float rotatingSensitvity = 1f;
 
@@ -14,7 +14,7 @@ public class Torus : MonoBehaviour
         #region Moving
         foreach (var touch in Input.touches)
         {
-            Vector3 delta = new Vector3(touch.deltaPosition.x, touch.deltaPosition.y, 0);
+            Vector3 delta = Camera.main.ScreenToViewportPoint(touch.deltaPosition);
 
             transform.DOMove(transform.position + delta * movingSensivity, Time.deltaTime);
         }

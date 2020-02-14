@@ -5,31 +5,35 @@ using DG.Tweening;
 
 public class StayOnTheScreen : MonoBehaviour
 {
-    [SerializeField]
-    Renderer renderer;
+    Collider topCollider;
+    Collider myCollider;
 
-    float smoothFactor = 0.1f;
+    Vector4 screenBounds;
 
-    float topBorder = 0.6f;
+    void Start()
+    {
+        topCollider = GameObject.Find("Trap").GetComponentInChildren<Collider>();
+        myCollider = GetComponentInChildren<Collider>();
+
+        float distance = (transform.position - Camera.main.transform.position).z;
+        screenBounds = new Vector4(
+            Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).x,
+            Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance)).x,
+            Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y,
+            topCollider.bounds.min.y);
+    }
 
     void LateUpdate()
     {
-        // TODO: Place collider bounds
-        //https://answers.unity.com/questions/509283/limit-a-sprite-to-not-go-off-screen.html
-        float distance = (transform.position - Camera.main.transform.position).z;
+        // Objects rotate over the time, so we need to recalculate these values
+        float leftBorder = screenBounds.x + (myCollider.bounds.size.x / 2);
+        float rightBorder = screenBounds.y - (myCollider.bounds.size.x / 2);
+        float bottomBorder = screenBounds.z + (myCollider.bounds.size.y / 2);
+        float topBorder = screenBounds.w - (myCollider.bounds.size.y / 2);
 
-        float leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).x + (renderer.bounds.size.x / 2);
-        float rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance)).x - (renderer.bounds.size.x / 2);
-
-        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y + (renderer.bounds.size.y / 2);
-        //float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y - (renderer.bounds.size.y / 2);
-
-
-        Vector3 targetPos = new Vector3(
+        transform.position = new Vector3(
             Mathf.Clamp(transform.position.x, leftBorder, rightBorder),
             Mathf.Clamp(transform.position.y, bottomBorder, topBorder),
             transform.position.z);
-
-        transform.position = targetPos;
     }
 }
