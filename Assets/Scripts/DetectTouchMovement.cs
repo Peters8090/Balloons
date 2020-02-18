@@ -19,6 +19,15 @@ public class DetectTouchMovement : MonoBehaviour
     ///   The delta of the angle between two touch points
     /// </summary>
     static public float turnAngleDelta;
+
+    static public float turnAngleDeltaClamped(float max)
+    {
+        float val = -turnAngleDelta;
+
+        return val > 0 ? Mathf.Clamp(val, 0, max) : Mathf.Clamp(val, -max, 0);
+    }
+
+
     /// <summary>
     ///   The angle between two touch points
     /// </summary>
@@ -70,7 +79,7 @@ public class DetectTouchMovement : MonoBehaviour
                 turnAngle = Angle(touch1.position, touch2.position);
                 float prevTurn = Angle(touch1.position - touch1.deltaPosition,
                                        touch2.position - touch2.deltaPosition);
-                turnAngleDelta = Mathf.DeltaAngle(prevTurn, turnAngle);
+                turnAngleDelta = -Mathf.DeltaAngle(prevTurn, turnAngle);
 
                 // ... if it's greater than a minimum threshold, it's a turn!
                 if (Mathf.Abs(turnAngleDelta) > minTurnAngle)
