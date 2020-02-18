@@ -15,7 +15,7 @@ public class Torus : MonoBehaviour
     {
         // Rotating
         DetectTouchMovement.Calculate();
-        rb.angularVelocity = DetectTouchMovement.turnAngleDelta * Vector3.forward;
+        rb.angularVelocity = DetectTouchMovement.turnAngleDelta * Vector3.forward * 2;
     }
 
     private void OnCollisionEnter(Collision collision)
