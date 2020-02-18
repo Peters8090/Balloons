@@ -5,31 +5,34 @@ using DG.Tweening;
 
 public class Balloon : MonoBehaviour
 {
-    Rigidbody rb;
-    float floatingForce = 1f;
+    ParticleSystem particles;
 
-    float dyingTime = 0.2f;
+    bool dying;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-    }
-    void FixedUpdate()
-    {
-        rb.AddForce(Vector3.up * floatingForce);
+        particles = GetComponentInChildren<ParticleSystem>();
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.gameObject.transform.name == "Trap")
-        {
-            transform.DOPunchScale(Vector3.one * 0.7f, dyingTime);
-            Invoke("Die", dyingTime);
-        }
+        if (collision.collider.gameObject.transform.name == "Trap")
+            StartCoroutine(Die());
     }
 
-    void Die()
+    IEnumerator Die()
     {
-        Destroy(gameObject);
+        if(!dying)
+        {
+            dying = true;
+
+            transform.DOPunchScale(Vector3.one * 0.2f, particles.main.duration);
+            particles.Play();
+
+            yield return new WaitForSeconds(particles.main.duration);
+
+            Handheld.Vibrate();
+            Destroy(gameObject);
+        }
     }
 }

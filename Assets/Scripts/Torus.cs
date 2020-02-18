@@ -1,37 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class Torus : MonoBehaviour
 {
-    float movingSensivity = 2f;
+    Rigidbody rb;
 
-    float rotatingSensitvity = 1f;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     void FixedUpdate()
     {
-        #region Moving
-        foreach (var touch in Input.touches)
-        {
-            Vector3 delta = Camera.main.ScreenToViewportPoint(touch.deltaPosition);
-
-            transform.DOMove(transform.position + delta * movingSensivity, Time.deltaTime);
-        }
-        #endregion
-
-        #region Rotating
-        Quaternion desiredRotation = transform.rotation;
-
+        // Rotating
         DetectTouchMovement.Calculate();
-        if (Mathf.Abs(DetectTouchMovement.turnAngleDelta) > 0)
-        {
-            Vector3 rotationDeg = Vector3.zero;
-            rotationDeg.z = DetectTouchMovement.turnAngleDelta;
-            desiredRotation *= Quaternion.Euler(rotationDeg * rotatingSensitvity);
-        }
+        rb.angularVelocity = DetectTouchMovement.turnAngleDelta * Vector3.forward;
+    }
 
-        transform.DOLocalRotateQuaternion(desiredRotation, Time.deltaTime);
-        #endregion
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(!collision.collider.gameObject.name.Contains("Balloon"))
+        {
+            print(collision.gameObject.name);
+        }
     }
 }

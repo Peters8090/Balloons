@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class StayOnTheScreen : MonoBehaviour
 {
@@ -25,7 +24,7 @@ public class StayOnTheScreen : MonoBehaviour
 
     void LateUpdate()
     {
-        // Objects rotate over the time, so we need to recalculate these values
+        // Objects rotate over the time, so we will need to recalculate these values
         float leftBorder = screenBounds.x + (myCollider.bounds.size.x / 2);
         float rightBorder = screenBounds.y - (myCollider.bounds.size.x / 2);
         float bottomBorder = screenBounds.z + (myCollider.bounds.size.y / 2);
