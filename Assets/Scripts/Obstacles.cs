@@ -17,16 +17,22 @@ public class Obstacles : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            swipeMouseDelta = (Vector2)Input.mousePosition - swipeStartMousePos;
-            transform.localEulerAngles = new Vector3(0, 0, swipeStartMyRotZ + 180 * swipeMouseDelta.x / Screen.width);
-            //transform.localEulerAngles = new Vector3(0, 0, swipeStartMyRotZ + (180 * swipeMouseDelta.magnitude / new Vector2(Screen.width, Screen.height).magnitude) * (swipeMouseDelta.x + swipeMouseDelta.y > 0 ? 1 : -1));
-            //GameObject go = new GameObject("temp");
-            //go.transform.position = Input.mousePosition;
-            //transform.LookAt(go.transform);
-            //Destroy(go);
-            //transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z);
-            //float angle = Mathf.Atan2(swipeMouseDelta.normalized.y, swipeMouseDelta.normalized.x) * Mathf.Rad2Deg;
-            //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            float multiplier = 1;
+            if (Input.mousePosition.x < Screen.width / 2)
+                multiplier = -1;
+            print(multiplier);
+
+            swipeMouseDelta = ((Vector2)Input.mousePosition - swipeStartMousePos) * multiplier;
+            if (Mathf.Abs(swipeMouseDelta.x) > Mathf.Abs(swipeMouseDelta.y))
+            {
+                transform.localEulerAngles = new Vector3(0, 0, swipeStartMyRotZ + 180 * swipeMouseDelta.x / Screen.width);
+            } else
+            {
+                transform.localEulerAngles = new Vector3(0, 0, swipeStartMyRotZ + 180 * swipeMouseDelta.y / Screen.width);
+            }
+
+            swipeStartMousePos = Input.mousePosition;
+            swipeStartMyRotZ = transform.localEulerAngles.z;
         }
     }
 }
