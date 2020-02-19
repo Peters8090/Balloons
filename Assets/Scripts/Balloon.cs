@@ -18,6 +18,8 @@ public class Balloon : MonoBehaviour
     {
         if (collision.collider.gameObject.transform.name == "Trap")
             StartCoroutine(Die());
+        else if (collision.collider.gameObject.transform.name.Contains("Star"))
+            StartCoroutine(Die());
     }
 
     IEnumerator Die()
