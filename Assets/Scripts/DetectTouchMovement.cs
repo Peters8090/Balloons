@@ -45,53 +45,56 @@ public class DetectTouchMovement : MonoBehaviour
     /// <summary>
     ///   Calculates Pinch and Turn - This should be used inside LateUpdate
     /// </summary>
+    /// 
+
+    static public Vector2 prevTouchPos;
+
     static public void Calculate()
     {
+        prevTouchPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - prevTouchPos;
+
         pinchDistance = pinchDistanceDelta = 0;
         turnAngle = turnAngleDelta = 0;
 
         // if two fingers are touching the screen at the same time ...
-        if (Input.touchCount == 2)
+        if (Input.GetMouseButton(0))
         {
-            Touch touch1 = Input.touches[0];
-            Touch touch2 = Input.touches[1];
+            Vector2 touch1 = new Vector2(Screen.width / 2, Screen.height / 2);
+            Vector2 touch2 = Input.mousePosition;
 
-            // ... if at least one of them moved ...
-            if (touch1.phase == TouchPhase.Moved || touch2.phase == TouchPhase.Moved)
+            // ... check the delta distance between them ...
+            pinchDistance = Vector2.Distance(touch1, touch2);
+            float prevDistance = Vector2.Distance(touch1 - touch1,
+                                                  touch2 - prevTouchPos);
+            pinchDistanceDelta = pinchDistance - prevDistance;
+
+            // ... if it's greater than a minimum threshold, it's a pinch!
+            if (Mathf.Abs(pinchDistanceDelta) > minPinchDistance)
             {
-                // ... check the delta distance between them ...
-                pinchDistance = Vector2.Distance(touch1.position, touch2.position);
-                float prevDistance = Vector2.Distance(touch1.position - touch1.deltaPosition,
-                                                      touch2.position - touch2.deltaPosition);
-                pinchDistanceDelta = pinchDistance - prevDistance;
+                pinchDistanceDelta *= pinchRatio;
+            }
+            else
+            {
+                pinchDistance = pinchDistanceDelta = 0;
+            }
 
-                // ... if it's greater than a minimum threshold, it's a pinch!
-                if (Mathf.Abs(pinchDistanceDelta) > minPinchDistance)
-                {
-                    pinchDistanceDelta *= pinchRatio;
-                }
-                else
-                {
-                    pinchDistance = pinchDistanceDelta = 0;
-                }
+            // ... or check the delta angle between them ...
+            turnAngle = Angle(touch1, touch2);
+            float prevTurn = Angle(touch1 - touch1,
+                                   touch2 - prevTouchPos);
+            turnAngleDelta = -Mathf.DeltaAngle(prevTurn, turnAngle);
 
-                // ... or check the delta angle between them ...
-                turnAngle = Angle(touch1.position, touch2.position);
-                float prevTurn = Angle(touch1.position - touch1.deltaPosition,
-                                       touch2.position - touch2.deltaPosition);
-                turnAngleDelta = -Mathf.DeltaAngle(prevTurn, turnAngle);
-
-                // ... if it's greater than a minimum threshold, it's a turn!
-                if (Mathf.Abs(turnAngleDelta) > minTurnAngle)
-                {
-                    turnAngleDelta *= pinchTurnRatio;
-                }
-                else
-                {
-                    turnAngle = turnAngleDelta = 0;
-                }
+            // ... if it's greater than a minimum threshold, it's a turn!
+            if (Mathf.Abs(turnAngleDelta) > minTurnAngle)
+            {
+                turnAngleDelta *= pinchTurnRatio;
+            }
+            else
+            {
+                turnAngle = turnAngleDelta = 0;
             }
         }
+        prevTouchPos = Input.mousePosition;
     }
 
     static private float Angle(Vector2 pos1, Vector2 pos2)

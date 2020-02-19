@@ -10,7 +10,7 @@ public class Torus : MonoBehaviour
     public static bool? allowedRotDir = null;
     public bool currentRotDir;
 
-    bool invertRotDirOnCollision = true;
+    bool invertRotDirOnCollision = false;
     float maxRotSpeed = 5f;
 
     void Start()
