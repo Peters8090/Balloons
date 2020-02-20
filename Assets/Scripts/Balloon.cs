@@ -3,40 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Balloon : MonoBehaviour
+public class Balloon : BoomObject
 {
-    ParticleSystem particles;
-
-    bool dying;
-
-    void Start()
-    {
-        particles = GetComponentInChildren<ParticleSystem>();
-    }
+    protected override float boomForce { get { return 0.2f; } }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.transform.name == "Trap")
+        if (collision.collider.gameObject == UsefulReferences.instance.trap)
             StartCoroutine(Die());
-        else if (collision.collider.gameObject.transform.name.Contains("Star"))
-        {
-            Destroy(collision.collider.gameObject);
-        }
-    }
-
-    IEnumerator Die()
-    {
-        if(!dying)
-        {
-            dying = true;
-
-            transform.DOPunchScale(Vector3.one * 0.2f, particles.main.duration);
-            particles.Play();
-
-            yield return new WaitForSeconds(particles.main.duration);
-
-            Handheld.Vibrate();
-            Destroy(gameObject);
-        }
     }
 }

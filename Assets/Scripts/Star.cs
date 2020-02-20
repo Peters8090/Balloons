@@ -1,21 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
-public class Star : MonoBehaviour
+public class Star : BoomObject
 {
+    protected override float boomForce { get { return 0.03f; } }
 
-
-    // Start is called before the first frame update
-    void Start()
+    void OnCollisionEnter(Collision collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (collision.collider.gameObject.tag == "Balloon")
+            StartCoroutine(Die());
     }
 }
