@@ -17,18 +17,15 @@ public class Obstacles : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            float multiplier = 1;
-            if (Input.mousePosition.x < Screen.width / 2)
-                multiplier = -1;
-            print(multiplier);
-
-            swipeMouseDelta = ((Vector2)Input.mousePosition - swipeStartMousePos) * multiplier;
+            swipeMouseDelta = ((Vector2)Input.mousePosition - swipeStartMousePos);
             if (Mathf.Abs(swipeMouseDelta.x) > Mathf.Abs(swipeMouseDelta.y))
             {
-                transform.localEulerAngles = new Vector3(0, 0, swipeStartMyRotZ + 180 * swipeMouseDelta.x / Screen.width);
+                float multiplier = Input.mousePosition.y > Screen.height / 2 ? -1 : 1;
+                transform.localEulerAngles = new Vector3(0, 0, swipeStartMyRotZ + 180 * swipeMouseDelta.x / Screen.width * multiplier);
             } else
             {
-                transform.localEulerAngles = new Vector3(0, 0, swipeStartMyRotZ + 180 * swipeMouseDelta.y / Screen.width);
+                float multiplier = Input.mousePosition.x > Screen.width / 2 ? 1 : -1;
+                transform.localEulerAngles = new Vector3(0, 0, swipeStartMyRotZ + 180 * swipeMouseDelta.y / Screen.width * multiplier);
             }
 
             swipeStartMousePos = Input.mousePosition;
