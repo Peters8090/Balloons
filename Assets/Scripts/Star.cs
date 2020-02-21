@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Star : BoomObject
 {
@@ -10,5 +8,16 @@ public class Star : BoomObject
     {
         if (collision.collider.gameObject.tag == "Balloon")
             StartCoroutine(Die());
+    }
+
+    protected override void LastWords()
+    {
+        base.LastWords();
+#if !UNITY_EDITOR && UNITY_IOS
+        IOSNative.StartHapticFeedback(HapticFeedbackTypes.MEDIUM);
+#endif
+        // Check if this was the last star on scene
+        if (FindObjectsOfType<Star>().Length == 1)
+            GameControlScript.instance.Level++;  
     }
 }

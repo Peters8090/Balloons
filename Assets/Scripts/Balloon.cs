@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
+﻿using UnityEngine;
 
 public class Balloon : BoomObject
 {
@@ -11,5 +8,14 @@ public class Balloon : BoomObject
     {
         if (collision.collider.gameObject == UsefulReferences.instance.trap)
             StartCoroutine(Die());
+    }
+
+    protected override void LastWords()
+    {
+        base.LastWords();
+#if !UNITY_EDITOR && UNITY_IOS
+        IOSNative.StartHapticFeedback(HapticFeedbackTypes.HEAVY);
+#endif
+        
     }
 }

@@ -5,10 +5,10 @@ using UnityEngine;
 public class UsefulReferences : MonoBehaviour
 {
     public static UsefulReferences instance;
+
+    public Vector2 levelElementsOffset = Vector2.zero;
+    public GameObject sceneElementsRoot;
     public GameObject trap;
 
-    void Awake()
-    {
-        UsefulReferences.instance = this;
-    }
+    void Awake() => instance = this;
 }

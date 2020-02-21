@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -26,7 +25,10 @@ public class BoomObject : MonoBehaviour
 
         yield return new WaitForSeconds(deathDelay);
 
-        Handheld.Vibrate();
+        LastWords();
+
         Destroy(gameObject);
     }
+
+    protected virtual void LastWords() { }
 }

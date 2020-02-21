@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Balloon
   - Star
+  - Level
+  - Trap
   layers:
   - Default
   - TransparentFX

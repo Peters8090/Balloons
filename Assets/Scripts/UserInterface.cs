@@ -7,6 +7,6 @@ public class UserInterface : MonoBehaviour
 {
     public void Restart()
     {
-        SceneManager.LoadScene("Main");
+        GameControlScript.instance.Level = 1;
     }
 }
