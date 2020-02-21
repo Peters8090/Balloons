@@ -18,11 +18,11 @@ public class SwipingArea : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
+            // Calculate the finger move
             swipeMouseDelta = (Vector2)Input.mousePosition - swipeStartMousePos;
-            // Check if player is swiping on the X or Y axis
 
             float targetRotZ = 0;
-
+            // Check if player is swiping on the X or Y axis
             if (Mathf.Abs(swipeMouseDelta.x) > Mathf.Abs(swipeMouseDelta.y))
             {
                 // Depending on which part of screen the player touches => swipe up and swipe down will be interpreted as turn the Swiping Area right or left

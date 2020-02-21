@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 299353788130880035}
-  - component: {fileID: 236729121}
-  m_Layer: 8
+  - component: {fileID: 128460697}
+  m_Layer: 0
   m_Name: Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,19 +33,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &236729121
-BoxCollider:
+--- !u!61 &128460697
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4664826659383706498}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.5231693}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.566988, y: 1.3061095, z: 0.48377088}
-  m_Center: {x: -0.0012176037, y: 0.5256378, z: -0.016101465}
+  m_Size: {x: 3.5756025, y: 1.3058534}
+  m_EdgeRadius: 0
 --- !u!1 &5031100097637373168
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +70,7 @@ GameObject:
   - component: {fileID: 8481872228890449812}
   - component: {fileID: 789215253482032997}
   - component: {fileID: 6226237958335409805}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Model2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +149,7 @@ GameObject:
   - component: {fileID: 5587088743227618505}
   - component: {fileID: 814964855197509890}
   - component: {fileID: 7688757003172400452}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Model1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

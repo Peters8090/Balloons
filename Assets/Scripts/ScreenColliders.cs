@@ -12,9 +12,9 @@ public class ScreenColliders : MonoBehaviour
 
     void Start()
     {
-        transform.Find("Top").GetComponent<BoxCollider>().center = Vector3.up * CameraViewFrustum.y;
-        transform.Find("Right").GetComponent<BoxCollider>().center = Vector3.right * CameraViewFrustum.x;
-        transform.Find("Bottom").GetComponent<BoxCollider>().center = Vector3.down * CameraViewFrustum.y;
-        transform.Find("Left").GetComponent<BoxCollider>().center = Vector3.left * CameraViewFrustum.x;
+        transform.Find("Top").GetComponent<BoxCollider2D>().offset = Vector2.up * CameraViewFrustum.y;
+        transform.Find("Right").GetComponent<BoxCollider2D>().offset = Vector2.right * CameraViewFrustum.x;
+        transform.Find("Bottom").GetComponent<BoxCollider2D>().offset = Vector2.down * CameraViewFrustum.y;
+        transform.Find("Left").GetComponent<BoxCollider2D>().offset = Vector2.left * CameraViewFrustum.x;
     }
 }
