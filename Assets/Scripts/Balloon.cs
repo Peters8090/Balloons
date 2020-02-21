@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Balloon : BoomObject
 {
-    protected override float boomForce { get { return 0.2f; } }
+    protected override float boomForce { get => 0.3f; }
 
     void OnCollisionEnter2D(Collision2D collision)
     {

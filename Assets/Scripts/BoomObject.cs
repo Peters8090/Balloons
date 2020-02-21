@@ -5,30 +5,28 @@ using DG.Tweening;
 
 public class BoomObject : MonoBehaviour
 {
-    ParticleSystem particles;
+    [SerializeField]
+    GameObject particlesPrefab;
 
-    protected virtual float boomForce { get { return 1f; } }
+    protected virtual float boomForce { get => 1f; }
 
+    float deathDelay = 0.3f;
     bool dying;
-
-    void Start()
-    {
-        particles = GetComponentInChildren<ParticleSystem>();
-    }
-
+    
     protected IEnumerator Die()
     {
-        if (!dying)
-        {
-            dying = true;
+        // To prevent twice particle animation executions etc.
+        if (dying)
+            yield break;
 
-            transform.DOPunchScale(Vector3.one * boomForce, particles.main.duration);
-            particles.Play();
+        dying = true;
+        transform.DOPunchScale(Vector3.one * boomForce, deathDelay);
+        GameObject particles = Instantiate(particlesPrefab, transform.position, Quaternion.identity);
+        particles.GetComponent<ParticleSystem>().Play();
 
-            yield return new WaitForSeconds(particles.main.duration);
+        yield return new WaitForSeconds(deathDelay);
 
-            Handheld.Vibrate();
-            Destroy(gameObject);
-        }
+        Handheld.Vibrate();
+        Destroy(gameObject);
     }
 }

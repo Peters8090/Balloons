@@ -1061,6 +1061,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1688675665}
     m_Modifications:
+    - target: {fileID: 8491893579163239424, guid: 990231ac1c586f9448b2f7f030fb91fa,
+        type: 3}
+      propertyPath: particlesPrefab
+      value: 
+      objectReference: {fileID: 2644986879258211895, guid: d9ca87cf6a5800949bf6b0cbd257c47a,
+        type: 3}
     - target: {fileID: 8491893579163239426, guid: 990231ac1c586f9448b2f7f030fb91fa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1119,7 +1125,7 @@ PrefabInstance:
     - target: {fileID: 8491893579163239454, guid: 990231ac1c586f9448b2f7f030fb91fa,
         type: 3}
       propertyPath: m_Name
-      value: Balloon (1)
+      value: Balloon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 990231ac1c586f9448b2f7f030fb91fa, type: 3}
@@ -1689,6 +1695,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9107830}
     m_Modifications:
+    - target: {fileID: 9051450874668448560, guid: 5af901fa6c3141641a5d2cf5f4fe7736,
+        type: 3}
+      propertyPath: particlesPrefab
+      value: 
+      objectReference: {fileID: 7808701264650674320, guid: 620ad0c7fa3e1eb4ca6447579415512b,
+        type: 3}
     - target: {fileID: 9051450874668448562, guid: 5af901fa6c3141641a5d2cf5f4fe7736,
         type: 3}
       propertyPath: m_LocalPosition.x
