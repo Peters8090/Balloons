@@ -16,6 +16,6 @@ public class Balloon : BoomObject
 #if !UNITY_EDITOR && UNITY_IOS
         IOSNative.StartHapticFeedback(HapticFeedbackTypes.HEAVY);
 #endif
-        
+        UsefulReferences.instance.restartButton.SetActive(true);
     }
 }

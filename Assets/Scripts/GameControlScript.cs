@@ -7,7 +7,15 @@ public class GameControlScript : MonoBehaviour
 {
     public static GameControlScript instance;
 
+    public bool gameOver;
+
     private int _level;
+
+    public bool IsLastLevel()
+    {
+        return levelPrefabs.Length == Level;
+    }
+
     public int Level
     {
         get => _level;
@@ -16,10 +24,7 @@ public class GameControlScript : MonoBehaviour
         {
             // Return if the requested level doesn't exist
             if (levelPrefabs.Length < value)
-            {
-                Level = 1;
                 return;
-            }
 
             _level = value;
 
@@ -38,5 +43,10 @@ public class GameControlScript : MonoBehaviour
     {
         levelPrefabs = Resources.LoadAll("Levels").Cast<GameObject>().ToArray();
         Level = 1;
+    }
+
+    void Update()
+    {
+        Time.timeScale = gameOver ? 0 : 1;
     }
 }

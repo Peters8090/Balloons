@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class UsefulReferences : MonoBehaviour
 {
@@ -9,6 +8,9 @@ public class UsefulReferences : MonoBehaviour
     public Vector2 levelElementsOffset = Vector2.zero;
     public GameObject sceneElementsRoot;
     public GameObject trap;
+
+    public GameObject restartButton;
+    public GameObject nextButton;
 
     void Awake() => instance = this;
 }

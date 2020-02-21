@@ -2,7 +2,7 @@
 
 public class Star : BoomObject
 {
-    protected override float boomForce { get => 0.1f; }
+    protected override float boomForce { get => 0.05f; }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -18,6 +18,12 @@ public class Star : BoomObject
 #endif
         // Check if this was the last star on scene
         if (FindObjectsOfType<Star>().Length == 1)
-            GameControlScript.instance.Level++;  
+        {
+            if(GameControlScript.instance.IsLastLevel())
+                UsefulReferences.instance.restartButton.SetActive(true);
+            else
+                UsefulReferences.instance.nextButton.SetActive(true);
+            GameControlScript.instance.gameOver = true;
+        }
     }
 }
